@@ -1,5 +1,6 @@
 package springboot.jpa.eventosprepostpersistencia.entities;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,16 @@ public class User {
    private String name;
    private String last_name;
 
+   @Embedded
+   private Audit audit = new Audit();
+
    public User() {
+   }
+
+   public User(Integer id, String name, String last_name) {
+      this.id = id;
+      this.name = name;
+      this.last_name = last_name;
    }
 
    public Integer getId() {
