@@ -1,13 +1,10 @@
-package springboot.crud.apirestfull.entities.dto;
+package springboot.jpa.asociacionesoantomanymanytoonejpa.dto;
 
-public class MessageException {
+public class Message {
 
    private Integer code;
    private String status;
-   private String descripton;
-
-   public MessageException() {
-   }
+   private String message;
 
    public Integer getCode() {
       return code;
@@ -25,12 +22,12 @@ public class MessageException {
       this.status = status;
    }
 
-   public String getDescripton() {
-      return descripton;
+   public String getMessage() {
+      return message;
    }
 
-   public void setDescripton(String descripton) {
-      this.descripton = descripton;
+   public void setMessage(String message) {
+      this.message = message;
    }
 
 }

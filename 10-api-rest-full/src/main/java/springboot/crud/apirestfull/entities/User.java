@@ -1,6 +1,5 @@
 package springboot.crud.apirestfull.entities;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +16,11 @@ public class User {
 
    // @NotBlank: valida que no este vacion "", que no sea un espacio " "
    // y que no sea null
-   @NotBlank 
+   @NotBlank
    private String name;
 
    // notacion para validación personalizada desde el package validation
-   @IsRequired 
+   @IsRequired
    private String last_name;
 
    public User() {
@@ -50,4 +49,10 @@ public class User {
    public void setLast_name(String last_name) {
       this.last_name = last_name;
    }
+
+   @Override
+   public String toString() {
+      return "User: name=" + name + ", last_name=" + last_name;
+   }
+
 }

@@ -1,5 +1,7 @@
 package springboot.crud.apirestfull.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import springboot.crud.apirestfull.entities.User;
-import springboot.crud.apirestfull.handlerExceptionMessage.HandlerExeption;
 import springboot.crud.apirestfull.handlerExceptionMessage.ResultException;
+import springboot.crud.apirestfull.handlerExceptionMessage.StatusMessage;
 import springboot.crud.apirestfull.services.UserServices;
 
 @RestController
@@ -28,36 +30,39 @@ public class UserRestController {
 
    @PostMapping("/create")
    public ResponseEntity<?> saveUser(@Valid @RequestBody User user, BindingResult result) {
-      
+
       if (result.hasFieldErrors()) {
          return ResultException.validation(result);
       }
 
       User userSave = service.save(user);
-      if(userSave != null){
-         return ResponseEntity.status(HttpStatus.OK).body(HandlerExeption.statusOk(userSave, "Se creo correctamente"));
-      }else{
-         return ResponseEntity.status(HttpStatus.OK).body(HandlerExeption.statusNotFound(user, "usuario ya registrado"));
-      }
+      return ResponseEntity.status(HttpStatus.OK).body(StatusMessage.messageStatusOk(userSave, "Usuario creado correctamente"));
    }
 
    @PutMapping("/edit/{id}")
    public ResponseEntity<?> editUser(@PathVariable Integer id, @Valid @RequestBody User user, BindingResult result) {
-      return null;
+
+      if (result.hasFieldErrors()) {
+         return ResultException.validation(result);
+      }
+      User userEdit = service.edit(id, user);
+      return ResponseEntity.status(HttpStatus.OK).body(StatusMessage.messageStatusOk(userEdit, "Usuario Actualizado correctamente"));
    }
 
    @DeleteMapping("/delete/{id}")
    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
-      return null;
+      service.delete(id);
+      return ResponseEntity.status(HttpStatus.OK).body(StatusMessage.messageStatusOk(null, "Usuario Eliminado correctamente"));
    }
 
-   @GetMapping("/id/{id}")
+   @GetMapping("/{id}")
    public ResponseEntity<?> findUserById(@PathVariable Integer id) {
-      return null;
+      User userFound = service.findById(id);
+      return ResponseEntity.status(HttpStatus.OK).body(StatusMessage.messageStatusOk(userFound, "Se encontro una coincidencia"));
    }
 
    @GetMapping("/all")
-   public ResponseEntity<?> findAllUser() {
-      return null;
+   public List<User> findAllUser() {
+      return (List<User>) service.findAll();
    }
 }

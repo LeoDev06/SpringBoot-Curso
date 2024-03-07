@@ -19,6 +19,6 @@ import springboot.crud.apirestfull.entities.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-   
+
    public boolean existsByName(String name);
 }

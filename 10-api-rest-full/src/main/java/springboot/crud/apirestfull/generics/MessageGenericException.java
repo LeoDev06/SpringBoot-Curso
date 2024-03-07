@@ -19,6 +19,11 @@ public class MessageGenericException<T> {
    public MessageGenericException() {
    }
 
+   public MessageGenericException(T data, MessageException message) {
+      this.data = data;
+      this.message = message;
+   }
+
    public T getData() {
       return data;
    }
