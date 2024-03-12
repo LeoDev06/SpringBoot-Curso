@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Invoice {
@@ -13,11 +16,18 @@ public class Invoice {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @Column(name = "id_user")
+   @ManyToOne
+   @JoinColumn(name = "id_user")
+   @NotNull(message = "El campo es requerido")
    private User user;
 
+   @NotNull(message = "El campo es requerido")
    private Double price;
+
+   @NotNull(message = "El campo es requerido")
    private Double tax;
+
+   @NotNull(message = "El campo es requerido")
    private Integer quantity;
 
    @Column(name = "total_invoice")
@@ -69,6 +79,12 @@ public class Invoice {
 
    public void setTotalInvoice(Double totalInvoice) {
       this.totalInvoice = totalInvoice;
+   }
+
+   @Override
+   public String toString() {
+      return "{id=" + id + ", user=" + user + ", price=" + price + ", tax=" + tax + ", quantity=" + quantity
+            + ", totalInvoice=" + totalInvoice + "}";
    }
 
 }

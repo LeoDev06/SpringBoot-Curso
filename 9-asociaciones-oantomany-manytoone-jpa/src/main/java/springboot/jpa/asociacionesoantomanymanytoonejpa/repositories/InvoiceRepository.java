@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import springboot.jpa.asociacionesoantomanymanytoonejpa.entities.Invoice;
 
 @Repository
-public interface InvoiceRepository extends CrudRepository<Invoice, Long>{
+public interface InvoiceRepository extends CrudRepository<Invoice, Long> {
 
 }

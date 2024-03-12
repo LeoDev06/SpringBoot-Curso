@@ -7,6 +7,11 @@ public class MessageGeneric<T> {
    private T entity;
    private Message message;
 
+   public MessageGeneric(T entity, Message message) {
+      this.entity = entity;
+      this.message = message;
+   }
+
    public T getEntity() {
       return entity;
    }
